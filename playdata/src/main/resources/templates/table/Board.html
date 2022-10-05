@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/Board.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/1.0.4/css/dataTables.responsive.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+      <div id = "header">
+        header다
+      </div>
+    </header>
+    <Main>
+        
+        <h2>PLAYDATA Community</h2>
+
+        <div>
+            <div class="container">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <table summary="This table shows how to create responsive tables using Datatables' extended functionality" class="table table-bordered table-hover dt-responsive">
+                      <thead>
+                        <tr>
+                          <th>Type</th>
+                          <th>제목</th>
+                          <th>작성자</th>
+                          <th>상세내용</th>
+                          <th>코스정보</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>type</td>
+                          <td>title</td>
+                          <td>name</td>
+                          <td>스프링부트를 이용한 커뮤니티만들기</td>
+                          <td>빅데이터13기</td>
+                        </tr>
+                      
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colspan="5" class="text-center">PLAYDATA <a href="http://www.playdata.io" target="_blank">WEBSITE</a> and <a href="#" target="_blank">Contact us</a>.</td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              
+              <p class="p">Demo by Park & Won. <a href="#" target="_blank"></a></p>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+        <script src="https://cdn.datatables.net/responsive/1.0.4/js/dataTables.responsive.js"></script>
+
+        <script>
+          $('table').DataTable();
+        </script>
+
+    </Main>
+
+    <footer>
+      <div class="footer">
+        sticky footer
+      </div>
+    </footer>
+
+</body>
+</html>

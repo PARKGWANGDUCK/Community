@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="../css/join.css">
+	<script src="../js/jquery-1.12.1.min.js"></script>
+</head>
+<body>
+	<div class="center">
+        <div class="container">
+           <div class="text">
+              회원가입
+           </div>
+           <form action="joinForm" method="get" class="appForm">
+              <div class="data"> 
+                 <label>ID</label>
+                 <input type="text" name="id" id="id_lbl" required>
+                 <input type="hidden" id="auth" value="false">
+                 <span class="valid" id="id_msg"></span>
+              </div>
+              <div class="data">
+                 <label>Password</label>
+                 <input type="password" name="pw" id="pwd_lbl" required>
+                 <span class="valid"></span>
+              </div>
+              <div class="data">
+                  <label>Password Check</label>
+                  <input type="password" id="pwd2_lbl" required>
+                  <span class="valid" id="pwd2_msg"></span>
+              </div>
+              <div class="data">
+                 <label>Name</label>
+                 <input type="text" name="name" id="name_lbl" required>
+              </div>
+              <div class="data">
+                 <label>CouseInfo</label>
+                 <input type="text" name="couseinfo" required>
+              </div>
+              <div class="data">
+                 <label>Phone_number</label>
+                 <input type="tel" name="phone" id="phone_lbl" placeholder="휴대폰”-”없이 숫자만 입력하세요" required>
+                 <span class="valid"></span>
+              </div>
+              <div class="btn">
+                 <div class="inner"></div>
+                 	<button type="submit" class="loginBtn">회원가입</button>
+              </div>
+           </form>
+        </div>
+     </div>
+     
+     <script>
+         
+         //회원가입버튼
+         $("#loginBtn").click(function(e) {
+            if( $("#auth").val() != 'true' ) {
+               alert("아이디를 확인하세요")
+               return;
+            } else if( $("#name_lbl").val().length < 3 ) {
+               alert("이름은 3글자 이상입니다");
+               return;
+            } else {
+               $(".appForm").submit();
+            }
+         })
+
+         //아이디란 유효성검사
+         $("#id_lbl").keyup(function() {
+
+            if( $(this).val().length < 5 ) {
+               $("#id_msg").html("아이디는 5글자 이상입니다");
+            } else {
+               $("#id_msg").html("");
+            }
+
+         })
+
+         //비밀번호 검사
+         $("#pwd2_lbl").keyup(function() {
+
+            if($("#pwd_lbl").val() == $("#pwd2_lbl").val() ) {
+               
+               $("#pwd2_msg").html("비밀번호가 일치합니다");
+            } else {
+               $("#pwd2_msg").html("비밀번호 확인란을 확인하세요");
+            }
+         });
+
+         //아이디 중복검사 focusout이벤트 비동기처리
+         $("#id_lbl").focusout(function() {
+            if( $(this).val().length < 5 ) {
+               $("#id_msg").html("아이디는 5글자 이상입니다");
+               return; //함수 종료
+            }
+
+            //post요청
+            var id = $(this).val();
+
+            $.ajax({
+               type: "post", //요청형식
+               url: "../idCheck", //요청주소
+               data: JSON.stringify({"id": id }),  //"id": 사용자가 입력한 아이디  String이 아닌 문자가 아닐경우에는 앞에 "\"" + id + "\"" 
+               contentType: "application/json",
+               success: function(data) {
+
+                  if(data == 0) { //중복x
+                     $("#id_lbl").attr("readonly", true);
+                     $("#id_msg").html("사용 가능한 아이디 입니다");
+                     $("#auth").val(true);
+                     
+                  } else { //중복o
+                     $("#id_lbl").attr("readonly", false);
+                     $("#id_msg").html("중복된 아이디 입니다");
+                     $("#auth").val(false);
+                  }
+                  
+               },
+               error: function(status, err) {
+                  console.log(status)
+               }
+               
+            });
+
+         })
+     </script>
+</body>
+</html>
